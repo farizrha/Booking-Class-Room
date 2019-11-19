@@ -17,7 +17,7 @@ public class MainController {
     public ModelAndView main(ModelAndView mView,
                              @ModelAttribute(name = "result_code") String result_code,
                              @ModelAttribute(name = "result_message") String result_message){
-        System.out.println(pEncoder.encode("fariz")); //TODO delete this line.
+        System.out.println(pEncoder.encode("ilyas")); //TODO delete this line.
         mView.setViewName("pages/home/index");
         return mView;
     }
