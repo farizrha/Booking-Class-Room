@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      dir="ltr"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+        <title layout:title-pattern="$LAYOUT_TITLE | $CONTENT_TITLE">Classroom Book IULI</title>
+        <meta name="description" content="Classroom Book"/>
+        <meta name="keywords"
+              content="Classroom book"/>
+        <meta name="author" content="https://lua.co.id"/>
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" type="image/x-icon" th:href="@{/assets/images/favicon.ico}">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" th:href="@{/dist/css/style.css}">
+        <!--        Terdapat perubahan di sytle.css dari default jangan pakai yang min-->
+        <!--        <link rel="stylesheet" th:href="@{/dist/css/style.min.css}">-->
+        <!-- This Page CSS -->
+        <link rel="stylesheet" type="text/css" th:href="@{/assets/extra-libs/prism/prism.css}">
+        <link th:href="@{/dist/css/footer.css}" rel="stylesheet" type="text/css" />
+
+        <th:block layout:fragment="page_css"/>
+
+
+    </head>
+
+    <body>
+        <!-- ============================================================== -->
+        <!-- Preloader - style you can find in spinners.css -->
+        <!-- ============================================================== -->
+        <div class="preloader">
+            <div class="lds-ripple">
+                <div class="lds-pos"></div>
+                <div class="lds-pos"></div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- Main wrapper - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <div id="main-wrapper">
+
+            <th:block th:replace="layout/top-menu"/>
+
+            <th:block th:replace="layout/left-menu"/>
+
+            <div class="page-wrapper">
+                <!-- Fill in with breadcrum dan content-->
+
+
+                <th:block layout:fragment="content"/>
+
+                <th:block th:replace="layout/footer"/>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Page wrapper  -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- /#wrapper -->
+
+        <!-- JS ============================================ -->
+
+        <script th:src="@{/assets/libs/jquery/dist/jquery.min.js}"></script>
+        <!-- Bootstrap tether Core JavaScript -->
+        <script th:src="@{/assets/libs/popper.js/dist/umd/popper.min.js}"></script>
+        <script th:src="@{/assets/libs/bootstrap/dist/js/bootstrap.min.js}"></script>
+        <!-- apps -->
+        <script th:src="@{/dist/js/app.min.js}"></script>
+        <script th:src="@{/dist/js/app.init.mini-sidebar.js}"></script>
+        <script th:src="@{/dist/js/app-style-switcher.js}"></script>
+        <!-- slimscrollbar scrollbar JavaScript -->
+        <script th:src="@{/assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js}"></script>
+        <script th:src="@{/assets/extra-libs/sparkline/sparkline.js}"></script>
+        <!--Wave Effects -->
+        <script th:src="@{/dist/js/waves.js}"></script>
+        <!--Menu sidebar -->
+        <script th:src="@{/dist/js/sidebarmenu.js}"></script>
+        <!--Custom JavaScript -->
+        <script th:src="@{/dist/js/custom.min.js}"></script>
+        <!-- This Page JS -->
+        <script th:src="@{/assets/extra-libs/prism/prism.js}"></script>
+
+        <script th:src="@{/dist/js/customlua.js}">s</script>
+
+        <th:block layout:fragment="page_js"/>
+    </body>
+</html>

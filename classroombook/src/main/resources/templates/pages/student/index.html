@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <title>Student</title>
+</head>
+<body>
+    <div>Daftar Student</div>
+    <table>
+        <thead>
+            <th>No</th>
+            <th>Nama</th>
+            <th>Student ID</th>
+            <th>Batch</th>
+        </thead>
+        <tbody>
+            <tr th:each="s: ${students}">
+                <td th:text="${sStat.count}"></td>
+                <td th:text="${s.getName()}"></td>
+                <td th:text="${s.getStudentId()}"></td>
+                <td th:text="${s.getBatch()}"></td>
+            </tr>
+        </tbody>
+
+    </table>
+</body>
+</html>
