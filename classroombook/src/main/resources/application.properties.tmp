@@ -1,0 +1,16 @@
+# DATABASE
+spring.datasource.url=jdbc:postgresql://localhost/classroom
+spring.datasource.username=postgres
+spring.datasource.password=gajah
+
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation=true
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto=update
+
+spring.thymeleaf.cache=false
+
+server.port=8007
+server.servlet.context-path=/classroom
+
