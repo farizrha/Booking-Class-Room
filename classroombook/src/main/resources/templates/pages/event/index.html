@@ -34,42 +34,30 @@
         <!-- ============================================================== -->
         <!-- Start Page Content -->
         <!-- ============================================================== -->
-        <div class="row">
 
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a class="btn btn-dark waves-effect waves-light" th:href="@{/lecturer/add}"> add lecturer</a>
-                <h4 class="card-title">   </h4>
-                <div class="card">
-                    <div class=""card-body>
-                        <h4 class="card-title">Lecturers</h4>
-                        <h6 class="card-subtitle">List</h6>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Lecturer Name</th>
-                                <th>NIDN</th>
+                                <th>Event</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="l: ${lecturerList}">
-                                <td th:text="${lStat.count}"></td>
-                                <td th:text="${l.getName()}"></td>
-                                <td th:text="${l.getNidn()}"></td>
+                            <tr th:each="r: ${eventList}">
+                                <td th:text="${rStat.count}"></td>
+                                <td th:text="${r.getType()}"></td>
                                 <td>
-                                    <a th:href="@{'/lecturer/edit'+${l.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/lecturer/delete'+${l.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/event/edit'+${r.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/event/delete'+${r.getId()}}"> <i class="mdi mdi-delete"></i> </a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
