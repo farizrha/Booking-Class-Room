@@ -56,6 +56,12 @@
                                        required
                                        placeholder="Study Program Name"
                                 >
+                                <select class="form-control" >
+                                    <option value="class"> Class</option>
+                                    <option value="makeup"> Makeup Class</option>
+                                    <option value="seminar"> Seminar</option>
+                                    <option value="others"> Others</option>
+                                </select>
                                 <div class="help-block with-errors" th:if="${#fields.hasErrors('name')}">
                                     <ul class="list-unstyled" th:each="v: ${#fields.errors('name')}">
                                         <li th:text="${v}">
