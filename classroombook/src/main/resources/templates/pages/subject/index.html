@@ -35,39 +35,37 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <div class="row">
+            <div class="card-body">
+                <div class="form-group m-b-0 text-right">
+                    <a type="submit" th:href="@{/subject/add}" class="btn btn-info waves-effect waves-light">Add Subject</a>
 
-        </div>
-        <div class="row">
-            <div class="col-12">
-                <a class="btn btn-dark waves-effect waves-light" th:href="@{/studyprogram/add}"> add room</a>
-                <h4 class="card-title">   </h4>
-                <div class="card">
-                    <div class=""card-body>
-                        <h4 class="card-title">Study Program</h4>
-                        <h6 class="card-subtitle">List</h6>
+                </div>
+            </div>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>StudyProgram</th>
+                                <th>Name</th>
+                                <th>Year</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="sp: ${studyProgramList}">
-                                <td th:text="${spStat.count}"></td>
-                                <td th:text="${sp.getName()}"></td>
+                            <tr th:each="r: ${subjectList}">
+                                <td th:text="${rStat.count}"></td>
+                                <td th:text="${r.getName()}"></td>
+                                <td th:text="${r.getYear()}"></td>
                                 <td>
-                                    <a th:href="@{'/room/edit'+${sp.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/room/delete'+${sp.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/room/edit'+${r.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/room/delete'+${r.getId()}}"> <i class="mdi mdi-delete"></i> </a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
-                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->

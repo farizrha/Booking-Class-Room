@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <!--      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">-->
 
     <!-- ============================================================== -->
@@ -41,11 +41,12 @@
                                     </a>
                                 </li>
                                 <li class="sidebar-item" sec:authorize="hasRole('EVENT')">
-                                    <a th:href="@{/book/event}" class="sidebar-link">
+                                    <a th:href="@{/event/add}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i>
                                         <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Event</span>
                                     </a>
                                 </li>
+
                             </ul>
                         </li>
                         <li class="sidebar-item" sec:authorize="hasRole('MASTER_DATA_MENU')">
@@ -55,6 +56,9 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
+
+                                    <a th:href="@{/subject}" class="sidebar-link">
+
                                     <a th:href="@{/room}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i>
                                         <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Room</span>
@@ -68,19 +72,23 @@
                                         <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Study Program</span>
                                     </a>
                                     <a th:href="@{/lecturer}" class="sidebar-link">
-                                        <i class="mdi mdi-octagram"></i>
-                                        <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Lecturers</span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul aria-expanded="false" class="collapse first-level">
-                                <li class="sidebar-item">
-                                    <a th:href="@{/subject}" class="sidebar-link">
+
                                         <i class="mdi mdi-octagram"></i>
                                         <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Subject</span>
                                     </a>
                                 </li>
                             </ul>
+
+                            <ul aria-expanded="false" class="collapse first-level">
+                                <li class="sidebar-item">
+                                    <a th:href="@{/event}" class="sidebar-link">
+                                        <i class="mdi mdi-octagram"></i>
+                                        <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Subject</span>
+                                    </a>
+                                </li>
+                            </ul>
+
+
                         </li>
                         <li class="sidebar-item">
                             <a class="sidebar-link waves-effect waves-dark sidebar-link"
