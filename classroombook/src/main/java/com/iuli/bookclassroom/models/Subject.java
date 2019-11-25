@@ -16,6 +16,8 @@ public class Subject {
     //2019
     private Integer year;
 
+    //TODO: tambah semester dan study program
+
     @OneToMany(cascade = CascadeType.ALL,
             fetch = FetchType.LAZY,
             mappedBy = "subject")

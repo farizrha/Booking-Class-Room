@@ -6,7 +6,7 @@
         layout:decorate="~{layout/master}"
 >
 <head>
-    <title>Beranda</title>
+    <title>List Of Student</title>
     <style>
         .slick-prev:before,
         .slick-next:before {
@@ -35,40 +35,40 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <div class="row">
-            <div class="card-body">
-                <div class="form-group m-b-0 text-right">
-                    <a type="submit" th:href="@{/subject/add}" class="btn btn-info waves-effect waves-light">Add Subject</a>
-
-                </div>
-            </div>
+            <div class="col-12">
+                <a class="btn btn-dark waves-effect waves-light" th:href="@{/student/add}"> Enroll Student</a>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title" th:text="${subject.getName()}"></h4>
+                        <h6 class="card-subtitle">List of Students </h6>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
-                                <th>Year</th>
-                                <th>Semester</th>
-                                <th>Action</th>
+                                <th>StudentId</th>
+                                <th>Email</th>
+                                <th>Batch</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="subject: ${subjectList}">
-                                <td th:text="${subjectStat.count}"></td>
-                                <td th:text="${subject.getName()}"></td>
-                                <td th:text="${subject.getYear()}"></td>
-                                <td></td>
+                            <tr th:each="ss: ${studentSubjectList}">
+                                <td th:text="${ssStat.count}"></td>
+                                <td th:text="${ss.getStudent().getName()}"></td>
+                                <td th:text="${ss.getStudent().getStudentId()}"></td>
+                                <td th:text="${ss.getStudent().getEmail()}"></td>
+                                <td th:text="${ss.getStudent().getBatch()}"></td>
                                 <td>
-                                    <a th:href="@{'/subject/edit'+${subject.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/subject/delete'+${subject.getId()}}"> <i class="mdi mdi-delete"></i> </a>
-                                    <a th:href="@{'/student/subject/'+${subject.getId()}}"> <i class="mdi mdi-account"></i> </a>
+                                    <a th:href="@{'/student/subject/delete'+${ss.getId()}}"> <i class="mdi mdi-delete"></i> </a>
                                 </td>
                             </tr>
                             </tbody>
                         </table>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
