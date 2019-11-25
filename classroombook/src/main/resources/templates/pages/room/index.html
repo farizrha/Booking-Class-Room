@@ -6,7 +6,7 @@
         layout:decorate="~{layout/master}"
 >
 <head>
-    <title>List Of Student</title>
+    <title>Beranda</title>
     <style>
         .slick-prev:before,
         .slick-next:before {
@@ -36,32 +36,31 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-dark waves-effect waves-light" th:href="@{/student/add}"> Enroll Student</a>
+                <a class="btn btn-primary btn-sm" th:href="@{/room/add}"> Add Room</a>
                 <br>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Student List</h4>
-                        <h6 class="card-subtitle">List of Students </h6>
+                        <h4 class="card-title">Room List</h4>
+                        <h6 class="card-subtitle">List of Rooms </h6>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
                                 <th>Name</th>
-                                <th>StudentId</th>
-                                <th>Email</th>
-                                <th>Batch</th>
+                                <th>Capacity</th>
+                                <th>Description</th>
+                                <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="r: ${studentList}">
+                            <tr th:each="r: ${roomList}">
                                 <td th:text="${rStat.count}"></td>
                                 <td th:text="${r.getName()}"></td>
-                                <td th:text="${r.getStudentId()}"></td>
-                                <td th:text="${r.getEmail()}"></td>
-                                <td th:text="${r.getBatch()}"></td>
+                                <td th:text="${r.getCapacity()}"></td>
+                                <td th:text="${r.getDescription()}"></td>
                                 <td>
-                                    <a th:href="@{'/student/edit'+${r.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/student/delete'+${r.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/room/edit'+${r.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/room/delete'+${r.getId()}}"> <i class="mdi mdi-delete"></i> </a>
                                 </td>
                             </tr>
                             </tbody>
