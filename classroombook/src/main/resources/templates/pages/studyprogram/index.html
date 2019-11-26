@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <title>Beranda</title>
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+        .slick-slide {
+            transition: all ease-in-out .3s;
+            /*opacity: .2;*/
+        }
+
+    </style>
+</head>
+
+<th:block layout:fragment="page_css">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick-theme.css}">
+</th:block>
+<style type="text/css">
+
+</style>
+
+<th:block layout:fragment="content">
+
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <a class="btn btn-primary btn-sm" th:href="@{/studyprogram/add}"> Add Study Program</a>
+                <br>
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Study Program</h4>
+                        <table class="table table-borderless">
+                            <thead>
+                            <tr>
+                                <th>No.</th>
+                                <th>Study Program</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="sp: ${studyprogramList}">
+                                <td th:text="${spStat.count}"></td>
+                                <td th:text="${sp.getName()}"></td>
+                                <td>
+                                    <a th:href="@{'/room/edit'+${sp.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/room/delete'+${sp.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+</th:block>
+
+</html>
