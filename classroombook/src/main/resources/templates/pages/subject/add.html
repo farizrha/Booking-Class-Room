@@ -86,6 +86,24 @@
                                      </div>
                                  </div>
                              </div>
+                             <div class="form-group row"
+                                  th:classappend="${#fields.hasErrors('semester') ? 'has-error' : ''}">
+                                 <label for="name_label_form" class="col-sm-3 text-right control-label col-form-label">Semester</label>
+                                 <div class="col-9">
+                                     <input type="text" class="form-control"
+                                            name="semester" id="semester_label_form"
+                                            th:field="*{semester}"
+                                            required
+                                            placeholder="Semester"
+                                     >
+                                     <div class="help-block with-errors" th:if="${#fields.hasErrors('semester')}">
+                                         <ul class="list-unstyled" th:each="v: ${#fields.errors('semester')}">
+                                             <li th:text="${v}">
+                                             </li>
+                                         </ul>
+                                     </div>
+                                 </div>
+                             </div>
 
 
                              <div class="card-body">

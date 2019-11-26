@@ -16,6 +16,8 @@ public class Subject {
     //2019
     private Integer year;
 
+    private Integer semester;
+
     //TODO: tambah semester dan study program
 
     @OneToMany(cascade = CascadeType.ALL,
@@ -50,6 +52,14 @@ public class Subject {
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Integer getSemester() {
+        return semester;
+    }
+
+    public void setSemester(Integer semester) {
+        this.semester = semester;
     }
 
     public List<SubjectStudyProgram> getSubjectStudyPrograms() {
