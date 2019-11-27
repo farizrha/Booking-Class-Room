@@ -18,11 +18,18 @@
         }
 
     </style>
+    <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
+
+    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js}"></script>
+    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js}"></script>
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css}" />
 </head>
 
 <th:block layout:fragment="page_css">
     <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick-theme.css}">
+
+
 </th:block>
 <style type="text/css">
 
@@ -65,14 +72,77 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Event Type</label>
+                                <div class="col-9">
+                                    <select class="form-control" id="event-id"
+                                            th:field="*{event}"
+                                            name="event">
+                                        <option th:each="e: ${typeeventList}" th:text="${e.getType()}"
+                                                th:value="${e.getId()}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Study Program</label>
+                                <div class="col-9">
+                                    <select class="form-control" id="studyprogram-id" name="studyprogram"
+                                            th:field="*{event}"
+                                            >
+                                        <option th:each="sp: ${typestudyprogramList}" th:text="${sp.getName()}"
+                                                th:value="${sp.getId()}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Room</label>
+                                <div class="col-9">
+                                    <select class="form-control" id="room-id" name="studyprogram"
+                                            th:field="*{event}"
+                                    >
+                                        <option th:each="r: ${typeroomList}" th:text="${r.getName()}"
+                                                th:value="${r.getId()}">
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Pick Start Date Time</label>
+                                <!--<div class="col-sm-9">
+                                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
+                                        <label class="control-label" for="datepicker-start">Start Date</label>
+                                        <input type="text" class="form-control" id="datepicker-start">
+                                    </div>
+                                </div>-->
+                                <div class="col-sm-9">
+                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
+                                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                            </div>
+                                        </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(function () {
+                                        $('#datetimepicker2').datetimepicker({
+                                            locale: 'id'
+                                        });
+                                    });
+                                </script>
+
+
+                            </div>
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">
                                 <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
                                 <button type="button" class="btn btn-dark waves-effect waves-light" onclick="goBack()">Cancel</button>
                             </div>
                         </div>
+                        </div>
                     </form>
+
                 </div>
                 <hr>
             </div>
@@ -84,5 +154,4 @@
     <!-- ============================================================== -->
     <!-- ============================================================== -->
 </th:block>
-
 </html>

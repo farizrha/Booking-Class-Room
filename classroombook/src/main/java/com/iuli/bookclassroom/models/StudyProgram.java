@@ -1,6 +1,7 @@
 package com.iuli.bookclassroom.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table (name = "study_program")
@@ -26,5 +27,6 @@ public class StudyProgram {
     public void setName(String name) {
         this.name = name;
     }
+
 
 }

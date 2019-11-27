@@ -6,7 +6,7 @@
         layout:decorate="~{layout/master}"
 >
 <head>
-    <title>Beranda</title>
+    <title>Add Room</title>
     <style>
         .slick-prev:before,
         .slick-next:before {
@@ -35,53 +35,51 @@
         <!-- Start Page Content -->
         <!-- ============================================================== -->
         <div class="row">
-             <div class="col-12">
-                 <div class="card">
-                     <div class="card-body">
-                        <h4 class ="card-header"> Add Event</h4>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Event</h4>
+                        <h6 class="card-subtitle">Adding Event Form </h6>
+                    </div>
+                    <form class="form-horizontal"
+                        th:action="@{/event/create}"
+                        th:object="${data}"
+                        method="post"
+                        enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('type') ? 'has-error' : ''}">
+                                <label for="type-i" class="col-sm-3 text-right control-label col-form-label">Event</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control"
+                                           name="type" id="type-i"
+                                           th:field="*{type}"
+                                           required
+                                           placeholder="insert event name here"
+                                    >
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('type')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('type')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
 
-                     </div>
-
-                     <form class="form-horizontal"
-                           th:action="@{/event/create}"
-                           th:object="${data}"
-                           method="post"
-                           enctype="multipart/form-data">
-                         <div class="card-body">
-
-                             <div class="form-group row"
-                                  th:classappend="${#fields.hasErrors('type') ? 'has-error' : ''}">
-                                 <label for="type_label_form" class="col-sm-3 text-right control-label col-form-label">Event</label>
-                                 <div class="col-9">
-                                     <input type="text" class="form-control"
-                                            name="type" id="type_label_form"
-                                            th:field="*{type}"
-                                            required
-                                            placeholder="Event"
-                                     >
-                                     <div class="help-block with-errors" th:if="${#fields.hasErrors('type')}">
-                                         <ul class="list-unstyled" th:each="v: ${#fields.errors('type')}">
-                                             <li th:text="${v}">
-                                             </li>
-                                         </ul>
-                                     </div>
-                                 </div>
-                             </div>
-
-
-
-                             <div class="card-body">
-                                 <div class="form-group m-b-0 text-right">
-                                     <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                     <button type="button" class="btn btn-dark waves-effect waves-light"onclick="goBack()">Cancel</button>
-                                 </div>
-                             </div>
-                     </form>
-
-                 </div>
-             </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group m-b-0 text-right">
+                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                <button type="button" class="btn btn-dark waves-effect waves-light" onclick="goBack()">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+            </div>
         </div>
     </div>
+
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->

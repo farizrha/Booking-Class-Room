@@ -53,8 +53,9 @@
                                 <td th:text="${spStat.count}"></td>
                                 <td th:text="${sp.getName()}"></td>
                                 <td>
-                                    <a th:href="@{'/room/edit'+${sp.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/room/delete'+${sp.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/studyprogram/edit'+${sp.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/studyprogram/delete'+${sp.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/studyprogram/subject/'+${sp.getId()}}"> <i class="mdi mdi-account"></i> </a>
                                 </td>
                             </tr>
                             </tbody>

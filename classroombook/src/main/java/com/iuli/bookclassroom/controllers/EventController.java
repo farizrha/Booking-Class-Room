@@ -20,49 +20,53 @@ import java.util.List;
 @Controller
 @RequestMapping("event")
 public class EventController {
+    @Autowired
+    EventRepository eventRepository;
 
+    @GetMapping("/add")
+    public String add(Model model,
+                      @ModelAttribute(name = "result_code") String result_code,
+                      @ModelAttribute(name = "result_message") String result_message) {
+        if (!model.containsAttribute("data")) {
+            model.addAttribute("data", new Event());
+        }
 
-        @Autowired
-        EventRepository eventRepository;
-
-        @GetMapping("")
-        public ModelAndView index(ModelAndView mView,
-                                  @ModelAttribute(name = "result_code") String result_code,
-                                  @ModelAttribute(name = "result_message") String result_message) {
-            List<Event> eventList = eventRepository.findAll();
-            mView.addObject("eventList", eventList);
-
-            mView.setViewName("pages/event/index");
+        return "pages/event/add";
+    }
+    @PostMapping("/create")
+    public ModelAndView create(@Valid @ModelAttribute(name = "data") Event event,
+                               BindingResult result, ModelAndView mView,
+                               RedirectAttributes redirectAttributes){
+        if (result.hasErrors()) {
+            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Event Addition Failed", event,result);
+            mView.setViewName("redirect:/event/add");
             return mView;
         }
 
-        @GetMapping("/add")
-        public String add(Model model,
-                          @ModelAttribute(name ="result code") String result_code,
-                          @ModelAttribute(name ="result message") String result_message) {
-            if (!model.containsAttribute("data")){
-                model.addAttribute("data", new Event());
-            }
-            return "pages/event/add";
+        eventRepository.save(event);
+        GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Event Succesfully Added",null,null);
+        mView.setViewName("redirect:/event");
+        return mView;
+    }
+    @GetMapping("")
+    public ModelAndView index(ModelAndView mView,
+                              @ModelAttribute(name = "result_code") String result_code,
+                              @ModelAttribute(name = "result_message") String result_message) {
+        //get all data from room
+        List<Event> eventList = eventRepository.findAll();
+        mView.addObject("eventList", eventList);
+        mView.setViewName("pages/event/index");
+        return mView;
+    }
+    @GetMapping("/edit")
+    public String edit(Model model,
+                      @ModelAttribute(name = "result_code") String result_code,
+                      @ModelAttribute(name = "result_message") String result_message) {
+        if (!model.containsAttribute("data")) {
+            model.addAttribute("data", new Event());
         }
 
-        @PostMapping("/create")
-        public ModelAndView create(@Valid @ModelAttribute(name = "data") Event event,
-                                   BindingResult result, ModelAndView mView,
-                                   RedirectAttributes redirectAttributes) {
-            if (result.hasErrors()){
-                GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Error", event, result);
-                mView.setViewName("redirect:/event/add");
-                return mView;
-            }
-            eventRepository.save(event);
-            GlobalMethods.setRedirectAttribute(redirectAttributes, "1", "Success", null, null);
-            mView.setViewName("redirect:/event");
-            return mView;
-        }
-
-
-
+        return "pages/event/edit";
     }
 
-
+}
