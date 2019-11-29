@@ -18,11 +18,10 @@
         }
 
     </style>
-    <script type="text/javascript" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
-
-    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js}"></script>
-    <script type="text/javascript" th:src="@{https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js}"></script>
-    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css}" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/locale/af.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
 </head>
 
 <th:block layout:fragment="page_css">
@@ -72,6 +71,46 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('startDate') ? 'has-error' : ''}">
+                                <label class="col-sm-3 text-right control-label col-form-label">Start Date Time</label>
+                                <div class="col-9">
+                                    <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                                        th:field="*{startDate}"
+                                        required>
+                                        <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('startDate')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('startDate')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('endDate') ? 'has-error' : ''}">
+                                <label class="col-sm-3 text-right control-label col-form-label">End Date Time</label>
+                                <div class="col-9">
+                                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"
+                                        th:field="*{endDate}"
+                                        required>
+                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('endDate')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('endDate')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="form-group row">
                                 <label class="col-sm-3 text-right control-label col-form-label">Event Type</label>
                                 <div class="col-9">
@@ -79,12 +118,13 @@
                                             th:field="*{event}"
                                             name="event">
                                         <option th:each="e: ${typeeventList}" th:text="${e.getType()}"
-                                                th:value="${e.getId()}">
+                                                th:value="${e.getId()}"
+                                                placeholder="type of event">
                                         </option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <!--<div class="form-group row">
                                 <label class="col-sm-3 text-right control-label col-form-label">Study Program</label>
                                 <div class="col-9">
                                     <select class="form-control" id="studyprogram-id" name="studyprogram"
@@ -95,12 +135,12 @@
                                         </option>
                                     </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="form-group row">
                                 <label class="col-sm-3 text-right control-label col-form-label">Room</label>
                                 <div class="col-9">
-                                    <select class="form-control" id="room-id" name="studyprogram"
-                                            th:field="*{event}"
+                                    <select class="form-control" id="room-id" name="room"
+                                            th:field="*{room}"
                                     >
                                         <option th:each="r: ${typeroomList}" th:text="${r.getName()}"
                                                 th:value="${r.getId()}">
@@ -109,28 +149,6 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label class="col-sm-3 text-right control-label col-form-label">Pick Start Date Time</label>
-                                <!--<div class="col-sm-9">
-                                    <div class="form-group pmd-textfield pmd-textfield-floating-label">
-                                        <label class="control-label" for="datepicker-start">Start Date</label>
-                                        <input type="text" class="form-control" id="datepicker-start">
-                                    </div>
-                                </div>-->
-                                <div class="col-sm-9">
-                                        <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
-                                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>
-                                            <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                            </div>
-                                        </div>
-                                </div>
-                                <script type="text/javascript">
-                                    $(function () {
-                                        $('#datetimepicker2').datetimepicker({
-                                            locale: 'id'
-                                        });
-                                    });
-                                </script>
 
 
                             </div>
@@ -148,7 +166,16 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker1').datetimepicker();
+        });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $('#datetimepicker2').datetimepicker();
+        });
+    </script>
     <!-- ============================================================== -->
     <!-- End Container fluid  -->
     <!-- ============================================================== -->
