@@ -36,25 +36,26 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-primary btn-sm" th:href="@{/event/add}"> Add Event</a>
+                <a class="btn btn-primary btn-sm" th:href="@{/studyprogram/add}"> Add Study Program</a>
                 <br>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Event</h4>
+                        <h4 class="card-title">Study Program</h4>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Event</th>
+                                <th>Study Program</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="e: ${eventList}">
-                                <td th:text="${eStat.count}"></td>
-                                <td th:text="${e.getType()}"></td>
+                            <tr th:each="sp: ${studyprogramList}">
+                                <td th:text="${spStat.count}"></td>
+                                <td th:text="${sp.getName()}"></td>
                                 <td>
-                                    <a th:href="@{'/event/edit'+${e.getType()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/event/delete'+${e.getType()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/studyprogram/edit'+${sp.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/studyprogram/delete'+${sp.getId()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/studyprogram/subject/'+${sp.getId()}}"> <i class="mdi mdi-account"></i> </a>
                                 </td>
                             </tr>
                             </tbody>

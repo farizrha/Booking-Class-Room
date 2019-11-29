@@ -36,25 +36,26 @@
         <!-- ============================================================== -->
         <div class="row">
             <div class="col-12">
-                <a class="btn btn-primary btn-sm" th:href="@{/event/add}"> Add Event</a>
+                <a class="btn btn-primary btn-sm" th:href="@{/lecturer/add}"> Add Lecturer</a>
                 <br>
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Event</h4>
+                        <h4 class="card-title">Lecturers</h4>
                         <table class="table table-borderless">
                             <thead>
                             <tr>
                                 <th>No.</th>
-                                <th>Event</th>
+                                <th>Lecturer</th>
+                                <th>NIDN</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="e: ${eventList}">
-                                <td th:text="${eStat.count}"></td>
-                                <td th:text="${e.getType()}"></td>
+                            <tr th:each="l: ${lecturerList}">
+                                <td th:text="${lStat.count}"></td>
+                                <td th:text="${l.getName()}"></td>
                                 <td>
-                                    <a th:href="@{'/event/edit'+${e.getType()}}"> <i class="mdi mdi-pencil"></i> </a>
-                                    <a th:href="@{'/event/delete'+${e.getType()}}"> <i class="mdi mdi-delete"></i> </a>
+                                    <a th:href="@{'/lecturer/edit'+${l.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
+                                    <a th:href="@{'/lecturer/delete'+${l.getId()}}"> <i class="mdi mdi-delete"></i> </a>
                                 </td>
                             </tr>
                             </tbody>

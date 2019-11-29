@@ -1,8 +1,9 @@
 package com.iuli.bookclassroom.controllers;
 
 import com.iuli.bookclassroom.helper.GlobalMethods;
-import com.iuli.bookclassroom.models.Event;
-import com.iuli.bookclassroom.repository.EventRepository;
+import com.iuli.bookclassroom.models.Room;
+import com.iuli.bookclassroom.models.StudyProgram;
+import com.iuli.bookclassroom.repository.StudyProgramRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,34 +19,34 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("event")
-public class EventController {
+@RequestMapping("study_program")
+public class StudyProgramController {
     @Autowired
-    EventRepository eventRepository;
+    StudyProgramRepository studyProgramRepository;
 
     @GetMapping("/add")
     public String add(Model model,
                       @ModelAttribute(name = "result_code") String result_code,
                       @ModelAttribute(name = "result_message") String result_message) {
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Event());
+            model.addAttribute("data", new StudyProgram());
         }
 
-        return "pages/event/add";
+        return "pages/study_program/add";
     }
     @PostMapping("/create")
-    public ModelAndView create(@Valid @ModelAttribute(name = "data") Event event,
+    public ModelAndView create(@Valid @ModelAttribute(name = "data") StudyProgram studyprogram,
                                BindingResult result, ModelAndView mView,
                                RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
-            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Event Addition Failed", event,result);
-            mView.setViewName("redirect:/event/add");
+            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "StudyProgram Addition Failed", studyprogram,result);
+            mView.setViewName("redirect:/room/add");
             return mView;
         }
 
-        eventRepository.save(event);
-        GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Event Succesfully Added",null,null);
-        mView.setViewName("redirect:/event");
+        studyProgramRepository.save(studyprogram);
+        GlobalMethods.setRedirectAttribute(redirectAttributes,"1","StudyProgram Succesfully Added",null,null);
+        mView.setViewName("redirect:/studyprogram");
         return mView;
     }
     @GetMapping("")
@@ -53,9 +54,9 @@ public class EventController {
                               @ModelAttribute(name = "result_code") String result_code,
                               @ModelAttribute(name = "result_message") String result_message) {
         //get all data from room
-        List<Event> eventList = eventRepository.findAll();
-        mView.addObject("eventList", eventList);
-        mView.setViewName("pages/event/index");
+        List<StudyProgram> studyprogramList = studyProgramRepository.findAll();
+        mView.addObject("studyprogramList", studyprogramList);
+        mView.setViewName("pages/studyprogram/index");
         return mView;
     }
     @GetMapping("/edit")
@@ -63,10 +64,10 @@ public class EventController {
                       @ModelAttribute(name = "result_code") String result_code,
                       @ModelAttribute(name = "result_message") String result_message) {
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Event());
+            model.addAttribute("data", new StudyProgram());
         }
 
-        return "pages/event/edit";
+        return "pages/room/edit";
     }
 
 }

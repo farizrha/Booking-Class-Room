@@ -1,10 +1,8 @@
 package com.iuli.bookclassroom.controllers;
 
 import com.iuli.bookclassroom.helper.GlobalMethods;
-import com.iuli.bookclassroom.models.Book;
-import com.iuli.bookclassroom.models.Student;
-import com.iuli.bookclassroom.repository.BookRepository;
-import com.iuli.bookclassroom.repository.StudentRepository;
+import com.iuli.bookclassroom.models.*;
+import com.iuli.bookclassroom.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +13,22 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("book")
 public class BookController {
     @Autowired
     BookRepository bookRepository;
+
+    @Autowired
+    EventRepository eventRepository;
+
+    @Autowired
+    StudyProgramRepository studyProgramRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 //    @GetMapping("/add")
 //    public String add(Model model,
 //                      @ModelAttribute(name = "result_code") String result_code,
@@ -47,14 +55,29 @@ public class BookController {
 //        return mView;
 //    }
     @GetMapping("")
-    public String index(Model model,
-                      @ModelAttribute(name = "result_code") String result_code,
-                      @ModelAttribute(name = "result_message") String result_message) {
-        if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Book());
-        }
+        public String index(Model model,
+                /*@PathVariable Long id,*/
+                @ModelAttribute(name = "result_code") String result_code,
+                @ModelAttribute(name = "result_message") String result_message) {
+            if (!model.containsAttribute("data")) {
+                model.addAttribute("data", new Book());
+            }
 
-        return "pages/book/index";
+        /*Optional<Event> optionalEventList = eventRepository.findById(id);
+        Event event = optionalEventList.get();
+        List<Event> typeEventList = eventRepository.findByType(event);
+        model.addAttribute("typeEventList", typeEventList);*/
+
+            List<Event> typeeventList = eventRepository.findAll();
+            model.addAttribute("typeeventList", typeeventList);
+
+            List<StudyProgram> typestudyprogramList = studyProgramRepository.findAll();
+            model.addAttribute("typestudyprogramList", typestudyprogramList);
+
+            List<Room> typeroomList = roomRepository.findAll();
+            model.addAttribute("typeroomList", typeroomList);
+
+            return "pages/book/index";
 //    public ModelAndView index(ModelAndView mView,
 //                              @ModelAttribute(name = "result_code") String result_code,
 //                              @ModelAttribute(name = "result_message") String result_message) {
@@ -64,4 +87,6 @@ public class BookController {
 //        mView.setViewName("pages/book/index");
 //        return mView;
     }
+
+
 }

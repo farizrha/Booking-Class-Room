@@ -38,27 +38,27 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Add Event</h4>
-                        <h6 class="card-subtitle">Adding Event Form </h6>
+                        <h4 class="card-title">Add Study Program</h4>
+                        <h6 class="card-subtitle">Adding Study Program </h6>
                     </div>
                     <form class="form-horizontal"
-                        th:action="@{/event/create}"
+                        th:action="@{/studyprogram/create}"
                         th:object="${data}"
                         method="post"
                         enctype="multipart/form-data">
                         <div class="card-body">
                             <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('type') ? 'has-error' : ''}">
-                                <label for="type-i" class="col-sm-3 text-right control-label col-form-label">Event</label>
+                                 th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
+                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Study Program</label>
                                 <div class="col-9">
                                     <input type="text" class="form-control"
-                                           name="type" id="type-i"
-                                           th:field="*{type}"
+                                           name="name" id="name-i"
+                                           th:field="*{name}"
                                            required
-                                           placeholder="insert event name here"
+                                           placeholder="insert study program name here"
                                     >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('type')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('type')}">
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('name')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('name')}">
                                             <li th:text="${v}">
                                             </li>
                                         </ul>

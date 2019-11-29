@@ -29,11 +29,11 @@
                     </li>
                     <th:block sec:authorize="isAuthenticated()">
                         <li class="sidebar-item" sec:authorize="hasRole('MAKE_UP_CLASS') or hasRole('EVENT')">
-                            <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
+                            <a th:href="@{/book}" class="sidebar-link waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
                                 <i class="mdi mdi-book"></i>
                                 <span class="hide-menu">Book Room</span>
                             </a>
-                            <ul aria-expanded="false" class="collapse first-level">
+                            <!--<ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item" sec:authorize="hasRole('MAKE_UP_CLASS')">
                                     <a th:href="@{/book/makeup}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i>
@@ -47,7 +47,7 @@
                                     </a>
                                 </li>
 
-                            </ul>
+                            </ul>-->
                         </li>
                         <li class="sidebar-item" sec:authorize="hasRole('MASTER_DATA_MENU')">
                             <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false">
@@ -56,9 +56,6 @@
                             </a>
                             <ul aria-expanded="false" class="collapse first-level">
                                 <li class="sidebar-item">
-
-                                    <a th:href="@{/subject}" class="sidebar-link">
-
                                     <a th:href="@{/room}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i>
                                         <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Room</span>
@@ -73,8 +70,16 @@
                                     </a>
                                     <a th:href="@{/subject}" class="sidebar-link">
                                         <i class="mdi mdi-octagram"></i>
-                                        <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Subject</span>
+                                        <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Subjects</span>
                                     </a>
+                                        <a th:href="@{/lecturer}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i>
+                                            <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Lecturers</span>
+                                        </a>
+                                        <a th:href="@{/event}" class="sidebar-link">
+                                            <i class="mdi mdi-octagram"></i>
+                                            <span class="hide-menu" style="margin-left: 10px; font-style: italic"> Events</span>
+                                        </a>
                                 </li>
                             </ul>
 

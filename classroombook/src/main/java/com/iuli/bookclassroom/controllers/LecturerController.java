@@ -1,8 +1,9 @@
 package com.iuli.bookclassroom.controllers;
 
 import com.iuli.bookclassroom.helper.GlobalMethods;
-import com.iuli.bookclassroom.models.Event;
-import com.iuli.bookclassroom.repository.EventRepository;
+import com.iuli.bookclassroom.models.Lecturer;
+import com.iuli.bookclassroom.models.Student;
+import com.iuli.bookclassroom.repository.LecturerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,55 +19,43 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("event")
-public class EventController {
+@RequestMapping("lecturer")
+public class LecturerController {
     @Autowired
-    EventRepository eventRepository;
-
+    LecturerRepository lecturerRepository;
     @GetMapping("/add")
     public String add(Model model,
                       @ModelAttribute(name = "result_code") String result_code,
                       @ModelAttribute(name = "result_message") String result_message) {
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Event());
+            model.addAttribute("data", new Lecturer());
         }
 
-        return "pages/event/add";
+        return "pages/lecturer/add";
     }
     @PostMapping("/create")
-    public ModelAndView create(@Valid @ModelAttribute(name = "data") Event event,
+    public ModelAndView create(@Valid @ModelAttribute(name = "data") Lecturer lecturer,
                                BindingResult result, ModelAndView mView,
                                RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
-            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Event Addition Failed", event,result);
-            mView.setViewName("redirect:/event/add");
+            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Lecturer Addition Failed", lecturer,result);
+            mView.setViewName("redirect:/lecturer/add");
             return mView;
         }
 
-        eventRepository.save(event);
-        GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Event Succesfully Added",null,null);
-        mView.setViewName("redirect:/event");
+        lecturerRepository.save(lecturer);
+        GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Lecturer Succesfully Enrolled",null,null);
+        mView.setViewName("redirect:/lecturer");
         return mView;
     }
     @GetMapping("")
     public ModelAndView index(ModelAndView mView,
                               @ModelAttribute(name = "result_code") String result_code,
                               @ModelAttribute(name = "result_message") String result_message) {
-        //get all data from room
-        List<Event> eventList = eventRepository.findAll();
-        mView.addObject("eventList", eventList);
-        mView.setViewName("pages/event/index");
+        //get all data from student
+        List<Lecturer> lecturerList = lecturerRepository.findAll();
+        mView.addObject("lecturerList", lecturerList);
+        mView.setViewName("pages/lecturer/index");
         return mView;
     }
-    @GetMapping("/edit")
-    public String edit(Model model,
-                      @ModelAttribute(name = "result_code") String result_code,
-                      @ModelAttribute(name = "result_message") String result_message) {
-        if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Event());
-        }
-
-        return "pages/event/edit";
-    }
-
 }

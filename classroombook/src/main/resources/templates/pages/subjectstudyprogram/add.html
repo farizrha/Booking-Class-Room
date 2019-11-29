@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        xmlns:th="http://www.thymeleaf.org"
+        layout:decorate="~{layout/master}"
+>
+<head>
+    <title>Add Room</title>
+    <style>
+        .slick-prev:before,
+        .slick-next:before {
+            color: black;
+        }
+        .slick-slide {
+            transition: all ease-in-out .3s;
+            /*opacity: .2;*/
+        }
+
+    </style>
+</head>
+
+<th:block layout:fragment="page_css">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/dist/plugins/slick/slick-theme.css}">
+</th:block>
+<style type="text/css">
+
+</style>
+
+<th:block layout:fragment="content">
+
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Add Subject</h4>
+                        <h6 class="card-subtitle">Adding Subject Form </h6>
+                    </div>
+                    <form class="form-horizontal"
+                          th:action="@{/subject/create}"
+                          th:object="${data}"
+                          method="post"
+                          enctype="multipart/form-data">
+                        <div class="card-body">
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
+                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Subject Name</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control"
+                                           name="name" id="name-i"
+                                           th:field="*{name}"
+                                           required
+                                           placeholder="Subject Name"
+                                    >
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('name')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('name')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('year') ? 'has-error' : ''}">
+                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Year</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control"
+                                           name="year" id="year-i"
+                                           th:field="*{year}"
+                                           required
+                                           placeholder="Year"
+                                    >
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('year')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('year')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row"
+                                 th:classappend="${#fields.hasErrors('semester') ? 'has-error' : ''}">
+                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Semester</label>
+                                <div class="col-9">
+                                    <input type="text" class="form-control"
+                                           name="semester" id="semester-i"
+                                           th:field="*{semester}"
+                                           required
+                                           placeholder="semester"
+                                    >
+                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('semester')}">
+                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('semester')}">
+                                            <li th:text="${v}">
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group m-b-0 text-right">
+                                <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
+                                <button type="button" class="btn btn-dark waves-effect waves-light" onclick="goBack()">Cancel</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- End Container fluid  -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+</th:block>
+
+</html>

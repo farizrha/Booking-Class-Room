@@ -1,5 +1,7 @@
 package com.iuli.bookclassroom.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -8,6 +10,7 @@ import java.util.Date;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'hh:mm")
     private Long id;
 
     private String description;
@@ -62,5 +65,15 @@ public class Book {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    public Event getEvent()
+    {
+        return event;
+    }
+
+    public void setEvent(Event event)
+    {
+        this.event = event;
     }
 }
