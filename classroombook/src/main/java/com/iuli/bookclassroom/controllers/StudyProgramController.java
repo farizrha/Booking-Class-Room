@@ -19,7 +19,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @Controller
-@RequestMapping("study_program")
+@RequestMapping("studyprogram")
 public class StudyProgramController {
     @Autowired
     StudyProgramRepository studyProgramRepository;
@@ -32,7 +32,7 @@ public class StudyProgramController {
             model.addAttribute("data", new StudyProgram());
         }
 
-        return "pages/study_program/add";
+        return "pages/studyprogram/add";
     }
     @PostMapping("/create")
     public ModelAndView create(@Valid @ModelAttribute(name = "data") StudyProgram studyprogram,

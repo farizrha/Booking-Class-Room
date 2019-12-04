@@ -33,15 +33,26 @@ public class SubjectStudyProgramController {
     @Autowired
     SubjectRepository subjectRepository;
 
-    @GetMapping("/add")
+    @GetMapping("/add/{id}")
     public String add(Model model,
                       @ModelAttribute(name = "result_code") String result_code,
-                      @ModelAttribute(name = "result_message") String result_message) {
+                      @ModelAttribute(name = "result_message") String result_message,
+                      @PathVariable Long id //id study program
+                      ) {
+        Optional<StudyProgram> studyProgramOptional = studyProgramRepository.findById(id);
+        if(!studyProgramOptional.isPresent()){
+            return "redirect:/";
+        }
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Subject());
+            StudyProgram studyProgram =  studyProgramOptional.get();
+            SubjectStudyProgram subjectStudyProgram = new SubjectStudyProgram();
+            subjectStudyProgram.setStudyProgram(studyProgram);
+
+            model.addAttribute("data", subjectStudyProgram);
+            model.addAttribute("studyProgram", studyProgram);
         }
 
-        return "pages/subject/add";
+        return "pages/subjectstudyprogram/add";
     }
     @PostMapping("/create")
     public ModelAndView create(@Valid @ModelAttribute(name = "data") Subject subject,
@@ -71,7 +82,7 @@ public class SubjectStudyProgramController {
         StudyProgram studyProgram = studyProgramOptional.get();
         List<SubjectStudyProgram> subjectStudyProgramList = subjectStudyProgramRepository.findAllByStudyProgram(studyProgram);
         mView.addObject("subjectStudyProgramList", subjectStudyProgramList);
-        mView.addObject("studyprogram", studyProgram);
+        mView.addObject("studyProgram", studyProgram);
         mView.setViewName("pages/subjectstudyprogram/index");
         return mView;
     }
