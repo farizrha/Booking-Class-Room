@@ -51,8 +51,7 @@ public class StudentSubjectController {
     public ModelAndView create(@Valid @ModelAttribute(name = "data") StudentSubject studentSubject,
                                BindingResult result,
                                ModelAndView mView,
-                               RedirectAttributes redirectAttributes,
-                               @PathVariable Long id){
+                               RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
             GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Student Addition Failed", studentSubject,result);
             mView.setViewName("redirect:/student/subject/add");
@@ -61,7 +60,7 @@ public class StudentSubjectController {
 
         studentSubjectRepository.save(studentSubject);
         GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Student Succesfully Enrolled",null,null);
-        mView.setViewName("redirect:/student/subject/{id}");
+        mView.setViewName("redirect:/subject");
         return mView;
     }
     @GetMapping("/{id}")

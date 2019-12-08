@@ -52,7 +52,7 @@
                                     <select class="form-control" id="subject-id" name="subject"
                                             th:field="*{subject}"
                                     >
-                                        <option th:each="s: ${typesubjectList}" th:text="${s.getName()}"
+                                        <option th:each="s: ${typeSubjectList}" th:text="${s.getName()}"
                                                 th:value="${s.getId()}">
                                         </option>
                                     </select>

@@ -47,7 +47,7 @@ public class SubjectStudyProgramController {
         List<Subject> typeSubjectList = subjectRepository.findAll();
         model.addAttribute("typeSubjectList", typeSubjectList);
 
-        return "pages/studentsubject/add";
+        return "pages/subjectstudyprogram/add";
     }
     @PostMapping("/create")
     public ModelAndView create(@Valid @ModelAttribute(name = "data") SubjectStudyProgram subjectStudyProgram,
@@ -62,7 +62,7 @@ public class SubjectStudyProgramController {
 
         subjectStudyProgramRepository.save(subjectStudyProgram);
         GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Subject Succesfully Enrolled",null,null);
-        mView.setViewName("redirect:/subject/studyprogram/{id}");
+        mView.setViewName("redirect:/studyprogram");
         return mView;
     }
     @GetMapping("/{id}")
@@ -79,7 +79,7 @@ public class SubjectStudyProgramController {
         List<SubjectStudyProgram> subjectStudyProgramList = subjectStudyProgramRepository.findAllByStudyProgram(studyProgram);
         mView.addObject("subjectStudyProgramList", subjectStudyProgramList);
         mView.addObject("studyProgram", studyProgram);
-        mView.setViewName("pages/studyprogram/index");
+        mView.setViewName("pages/subjectstudyprogram/index");
         return mView;
     }
 }
