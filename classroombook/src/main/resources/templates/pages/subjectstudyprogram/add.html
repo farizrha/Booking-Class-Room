@@ -42,70 +42,41 @@
                         <h6 class="card-subtitle">Adding Subject Form </h6>
                     </div>
                     <form class="form-horizontal"
-                          th:action="@{/subject/create}"
+                          th:action="@{/studyprogram/subject/create}"
                           th:object="${data}"
                           method="post"
                           enctype="multipart/form-data">
                         <div class="card-body">
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Subject Name</label>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Subject</label>
                                 <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="name" id="name-i"
-                                           th:field="*{name}"
-                                           required
-                                           placeholder="Subject Name"
+                                    <select class="form-control" id="subject-id" name="subject"
+                                            th:field="*{subject}"
                                     >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('name')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('name')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        <option th:each="s: ${typesubjectList}" th:text="${s.getName()}"
+                                                th:value="${s.getId()}">
+                                        </option>
+                                    </select>
                                 </div>
+
                             </div>
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('year') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Year</label>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Study Program</label>
                                 <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="year" id="year-i"
-                                           th:field="*{year}"
-                                           required
-                                           placeholder="Year"
+                                    <select class="form-control" id="studyprogram-id" name="studyprogram"
+                                            th:field="*{studyProgram}"
                                     >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('year')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('year')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('semester') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Semester</label>
-                                <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="semester" id="semester-i"
-                                           th:field="*{semester}"
-                                           required
-                                           placeholder="semester"
-                                    >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('semester')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('semester')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        <option th:each="s: ${typestudyprogramList}" th:text="${s.getName()}"
+                                                th:value="${s.getId()}">
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">
                                 <button type="submit" class="btn btn-info waves-effect waves-light">Submit</button>
-                                <button type="button" class="btn btn-dark waves-effect waves-light" onclick="goBack()">Cancel</button>
+                                <button type="button" class="btn btn-dark waves-effect waves-light"onclick="goBack()">Cancel</button>
                             </div>
                         </div>
                     </form>

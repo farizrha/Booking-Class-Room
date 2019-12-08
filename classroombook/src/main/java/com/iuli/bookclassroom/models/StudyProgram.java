@@ -12,6 +12,11 @@ public class StudyProgram {
 
     private String name;
 
+    @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "studyProgram")
+    private List<SubjectStudyProgram> subjectStudyPrograms;
+
     public Long getId() {
         return id;
     }

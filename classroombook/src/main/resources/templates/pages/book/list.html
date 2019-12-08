@@ -57,9 +57,8 @@
                                 <td th:text="${b.getDescription()}"></td>
                                 <td th:text="${b.getStartDate()}"></td>
                                 <td th:text="${b.getEndDate()}"></td>
-                                <td th:text="${b.getEvent()}"></td>
-                                <td th:text="${b.getRoom()}"></td>
-
+                                <td th:text="${b.getEvent().getType()}"></td>
+                                <td th:text="${b.getRoom().getName()}"></td>
                                 <td>
                                     <a th:href="@{'/book/edit'+${b.getId()}}"> <i class="mdi mdi-pencil"></i> </a>
                                     <a th:href="@{'/book/delete'+${b.getId()}}"> <i class="mdi mdi-delete"></i> </a>

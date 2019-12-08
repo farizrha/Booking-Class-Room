@@ -42,83 +42,36 @@
                         <h6 class="card-subtitle">Add New Student</h6>
                     </div>
                     <form class="form-horizontal"
-                        th:action="@{/student/create}"
+                        th:action="@{/student/subject/create}"
                         th:object="${data}"
                         method="post"
                         enctype="multipart/form-data">
                         <div class="card-body">
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('name') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Name</label>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Student</label>
                                 <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="name" id="name-i"
-                                           th:field="*{name}"
-                                           required
-                                           placeholder="Student Name"
+                                    <select class="form-control" id="student-id" name="student"
+                                            th:field="*{student}"
                                     >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('name')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('name')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        <option th:each="s: ${typestudentList}" th:text="${s.getName()}"
+                                                th:value="${s.getId()}">
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('studentId') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">StudentID</label>
+                            <div class="form-group row">
+                                <label class="col-sm-3 text-right control-label col-form-label">Subject</label>
                                 <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="studentId" id="studentId-i"
-                                           th:field="*{studentId}"
-                                           required
-                                           placeholder="studentId"
+                                    <select class="form-control" id="subject-id" name="subject"
+                                            th:field="*{subject}"
                                     >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('studentId')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('studentId')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
+                                        <option th:each="s: ${typesubjectList}" th:text="${s.getName()}"
+                                                th:value="${s.getId()}">
+                                        </option>
+                                    </select>
                                 </div>
                             </div>
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('email') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Email</label>
-                                <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="email" id="email-i"
-                                           th:field="*{email}"
-                                           required
-                                           placeholder="email"
-                                    >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('email')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('email')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group row"
-                                 th:classappend="${#fields.hasErrors('batch') ? 'has-error' : ''}">
-                                <label for="name-i" class="col-sm-3 text-right control-label col-form-label">Batch</label>
-                                <div class="col-9">
-                                    <input type="text" class="form-control"
-                                           name="batch" id="batch-i"
-                                           th:field="*{batch}"
-                                           required
-                                           placeholder="batch"
-                                    >
-                                    <div class="help-block with-errors" th:if="${#fields.hasErrors('batch')}">
-                                        <ul class="list-unstyled" th:each="v: ${#fields.errors('batch')}">
-                                            <li th:text="${v}">
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="card-body">
                             <div class="form-group m-b-0 text-right">

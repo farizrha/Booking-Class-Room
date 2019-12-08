@@ -35,7 +35,6 @@ public class BookController {
                 model.addAttribute("data", new Book());
             }
 
-
             List<Event> typeeventList = eventRepository.findAll();
             model.addAttribute("typeeventList", typeeventList);
 

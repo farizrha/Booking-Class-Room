@@ -32,4 +32,12 @@ public class SubjectStudyProgram {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
+    public StudyProgram getStudyProgram(){
+        return studyProgram;
+    }
+
+    public void setStudyProgram(StudyProgram studyProgram){
+        this.studyProgram = studyProgram;
+    }
 }

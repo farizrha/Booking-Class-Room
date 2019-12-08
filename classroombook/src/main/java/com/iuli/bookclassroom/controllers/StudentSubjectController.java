@@ -36,24 +36,32 @@ public class StudentSubjectController {
                       @ModelAttribute(name = "result_code") String result_code,
                       @ModelAttribute(name = "result_message") String result_message) {
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Student());
+            model.addAttribute("data", new StudentSubject());
         }
 
-        return "pages/student/add";
+        List<Student> typestudentList = studentRepository.findAll();
+        model.addAttribute("typestudentList", typestudentList);
+
+        List<Subject> typesubjectList = subjectRepository.findAll();
+        model.addAttribute("typesubjectList", typesubjectList);
+
+        return "pages/studentsubject/add";
     }
     @PostMapping("/create")
-    public ModelAndView create(@Valid @ModelAttribute(name = "data") Student student,
-                               BindingResult result, ModelAndView mView,
-                               RedirectAttributes redirectAttributes){
+    public ModelAndView create(@Valid @ModelAttribute(name = "data") StudentSubject studentSubject,
+                               BindingResult result,
+                               ModelAndView mView,
+                               RedirectAttributes redirectAttributes,
+                               @PathVariable Long id){
         if (result.hasErrors()) {
-            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Student Addition Failed", student,result);
-            mView.setViewName("redirect:/student/add");
+            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Student Addition Failed", studentSubject,result);
+            mView.setViewName("redirect:/student/subject/add");
             return mView;
         }
 
-        studentRepository.save(student);
+        studentSubjectRepository.save(studentSubject);
         GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Student Succesfully Enrolled",null,null);
-        mView.setViewName("redirect:/student");
+        mView.setViewName("redirect:/student/subject/{id}");
         return mView;
     }
     @GetMapping("/{id}")

@@ -38,24 +38,30 @@ public class SubjectStudyProgramController {
                       @ModelAttribute(name = "result_code") String result_code,
                       @ModelAttribute(name = "result_message") String result_message) {
         if (!model.containsAttribute("data")) {
-            model.addAttribute("data", new Subject());
+            model.addAttribute("data", new SubjectStudyProgram());
         }
 
-        return "pages/subject/add";
+        List<Subject> typesubjectList = subjectRepository.findAll();
+        model.addAttribute("typesubjectList", typesubjectList);
+
+        List<StudyProgram> typestudyprogramList = studyProgramRepository.findAll();
+        model.addAttribute("typestudyprogramList", typestudyprogramList);
+
+        return "pages/subjectstudyprogram/add";
     }
     @PostMapping("/create")
-    public ModelAndView create(@Valid @ModelAttribute(name = "data") Subject subject,
+    public ModelAndView create(@Valid @ModelAttribute(name = "data") SubjectStudyProgram subjectStudyProgram,
                                BindingResult result, ModelAndView mView,
                                RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
-            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Subject Addition Failed", subject,result);
-            mView.setViewName("redirect:/subject/add");
+            GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Subject Addition Failed", subjectStudyProgram,result);
+            mView.setViewName("redirect:/studyprogram/subject/add");
             return mView;
         }
 
-        subjectRepository.save(subject);
+        subjectStudyProgramRepository.save(subjectStudyProgram);
         GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Subject Succesfully Enrolled",null,null);
-        mView.setViewName("redirect:/subject");
+        mView.setViewName("redirect:/studyprogram/subject");
         return mView;
     }
     @GetMapping("/{id}")
