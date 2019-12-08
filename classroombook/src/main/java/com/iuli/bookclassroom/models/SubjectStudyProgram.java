@@ -33,11 +33,11 @@ public class SubjectStudyProgram {
         this.subject = subject;
     }
 
-    public StudyProgram getStudyProgram(){
+    public StudyProgram getStudyProgram() {
         return studyProgram;
     }
 
-    public void setStudyProgram(StudyProgram studyProgram){
+    public void setStudyProram(StudyProgram studyProgram) {
         this.studyProgram = studyProgram;
     }
 }

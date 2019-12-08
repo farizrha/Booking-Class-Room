@@ -22,13 +22,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("studyprogram/subject")
+@RequestMapping("subject/studyprogram")
 public class SubjectStudyProgramController {
     @Autowired
-    SubjectStudyProgramRepository subjectStudyProgramRepository;
+    StudyProgramRepository studyProgramRepository;
 
     @Autowired
-    StudyProgramRepository studyProgramRepository;
+    SubjectStudyProgramRepository subjectStudyProgramRepository;
 
     @Autowired
     SubjectRepository subjectRepository;
@@ -41,32 +41,33 @@ public class SubjectStudyProgramController {
             model.addAttribute("data", new SubjectStudyProgram());
         }
 
-        List<Subject> typesubjectList = subjectRepository.findAll();
-        model.addAttribute("typesubjectList", typesubjectList);
+        List<StudyProgram> typeStudyProgramList = studyProgramRepository.findAll();
+        model.addAttribute("typeStudyProgramList", typeStudyProgramList);
 
-        List<StudyProgram> typestudyprogramList = studyProgramRepository.findAll();
-        model.addAttribute("typestudyprogramList", typestudyprogramList);
+        List<Subject> typeSubjectList = subjectRepository.findAll();
+        model.addAttribute("typeSubjectList", typeSubjectList);
 
-        return "pages/subjectstudyprogram/add";
+        return "pages/studentsubject/add";
     }
     @PostMapping("/create")
     public ModelAndView create(@Valid @ModelAttribute(name = "data") SubjectStudyProgram subjectStudyProgram,
-                               BindingResult result, ModelAndView mView,
+                               BindingResult result,
+                               ModelAndView mView,
                                RedirectAttributes redirectAttributes){
         if (result.hasErrors()) {
             GlobalMethods.setRedirectAttribute(redirectAttributes, "0", "Subject Addition Failed", subjectStudyProgram,result);
-            mView.setViewName("redirect:/studyprogram/subject/add");
+            mView.setViewName("redirect:/subject/studyprogram/add");
             return mView;
         }
 
         subjectStudyProgramRepository.save(subjectStudyProgram);
         GlobalMethods.setRedirectAttribute(redirectAttributes,"1","Subject Succesfully Enrolled",null,null);
-        mView.setViewName("redirect:/studyprogram/subject");
+        mView.setViewName("redirect:/subject/studyprogram/{id}");
         return mView;
     }
     @GetMapping("/{id}")
     public ModelAndView index(ModelAndView mView,
-                              @PathVariable Long id, //Study Program id
+                              @PathVariable Long id, //Subject id
                               @ModelAttribute(name = "result_code") String result_code,
                               @ModelAttribute(name = "result_message") String result_message) {
         //get all data from student
@@ -77,8 +78,8 @@ public class SubjectStudyProgramController {
         StudyProgram studyProgram = studyProgramOptional.get();
         List<SubjectStudyProgram> subjectStudyProgramList = subjectStudyProgramRepository.findAllByStudyProgram(studyProgram);
         mView.addObject("subjectStudyProgramList", subjectStudyProgramList);
-        mView.addObject("studyprogram", studyProgram);
-        mView.setViewName("pages/subjectstudyprogram/index");
+        mView.addObject("studyProgram", studyProgram);
+        mView.setViewName("pages/studyprogram/index");
         return mView;
     }
 }
